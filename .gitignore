@@ -1,3 +1,10 @@
+version.env
+.idea
+box/*.log
+box/.vagrant
+box/bionic64.box
+
+###
 *.gem
 *.rbc
 /.config

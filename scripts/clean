@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# This logic is to make sure, we can build directly from CLI
+if [ -z ${VERSION_SET+x} ];then
+    source $(dirname $0)/version
+fi
+
+source $(dirname $0)/variables
+
+rm box/"${OUTPUT_BOX}"
+rm -rf box/.vagrant

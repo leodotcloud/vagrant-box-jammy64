@@ -1,0 +1,27 @@
+#!/bin/sh
+
+cd $(dirname $0)/..
+
+source $(dirname $0)/variables
+
+REMOTE_BOX_VERSION=$(vagrant cloud search --provider virtualbox --json "${BASE_BOX}" | jq -r '.[] | select(.name == env.BASE_BOX) | .version')
+
+if grep -q "${REMOTE_BOX_VERSION}" box_version; then
+  echo "No new version released by upstream"
+else
+  echo "Found new upstream version: ${REMOTE_BOX_VERSION}"
+  if [ -z ${DRY_RUN+x} ];then
+    REPO=${GITHUB_REPOSITORY}
+    INPUT_BRANCH=main
+    ACTOR=leodotcloud
+    REMOTE="https://${ACTOR}:${MY_GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+
+    echo "${REMOTE_BOX_VERSION}" >| box_version
+    git add box_version
+    git commit -m "bumping box version to ${REMOTE_BOX_VERSION}"
+    git tag "${REMOTE_BOX_VERSION}"
+    git push "${REMOTE}" HEAD:${INPUT_BRANCH} --tags
+  else
+    echo "dry run, no action taken"
+  fi
+fi

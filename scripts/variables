@@ -1,0 +1,4 @@
+export GITHUB_REPOSITORY="leodotcloud/vagrant-box-jammy64"
+export BASE_BOX="ubuntu/jammy64"
+export BOX="jammy64"
+export OUTPUT_BOX="${BOX}.box"

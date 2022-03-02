@@ -1,0 +1,11 @@
+#!/bin/sh
+
+echo "Checking prerequisites"
+
+COMMAND="vagrant"
+echo "Checking for command: ${COMMAND}"
+if ! command -v "${COMMAND}"
+then
+    echo "${COMMAND} could not be found"
+    exit 1
+fi
