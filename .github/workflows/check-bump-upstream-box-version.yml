@@ -1,6 +1,8 @@
 name: check-and-bump-upstream-box-version
 on:
   schedule: [cron: '39 15 */1 * *']
+  workflow_dispatch:
+
 jobs:
   bump-box-version:
     runs-on: macos-10.15
