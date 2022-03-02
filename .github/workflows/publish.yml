@@ -1,0 +1,20 @@
+name: publish-box
+on:
+  push:
+    tags: ['*']
+jobs:
+  publish-box:
+    runs-on: macos-10.15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Check pre-requisites
+        run: ./scripts/check-prereqs
+      - name: Validate
+        run: ./scripts/validate
+      - name: Bring up the machine
+        run: ./scripts/up
+      - name: Package and publish the machine
+        run: ./scripts/package-publish
+        env:
+          VAGRANT_TOKEN: ${{ secrets.VAGRANT_TOKEN }}

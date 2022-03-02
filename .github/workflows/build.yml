@@ -1,0 +1,19 @@
+name: build
+on:
+  push:
+    branches: [dev]
+  pull_request:
+    branches: [main]
+    types: [opened]
+jobs:
+  build-box:
+    runs-on: macos-10.15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Check pre-requisites
+        run: ./scripts/check-prereqs
+      - name: Validate
+        run: ./scripts/validate
+      - name: Bring up the machine
+        run: ./scripts/up
