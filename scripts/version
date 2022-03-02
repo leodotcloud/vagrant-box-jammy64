@@ -39,5 +39,7 @@ export VERSION_SET=true
 export OS=${OS}
 export VERSION=${VERSION}
 export ARCH=${ARCH}
+export BOX_VERSION=${BOX_VERSION}
+export DOCKER_VERSION=${DOCKER_VERSION}
 EOT
 echo "Generated version.env"
